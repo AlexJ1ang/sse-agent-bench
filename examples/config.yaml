@@ -1,0 +1,59 @@
+# Generic example for an SSE-based agent service.
+# Adapt the target and mapping sections to your own API contract.
+
+target:
+  base_url: "http://localhost:8000"
+  chat_path: "/v1/chat/stream"
+  method: POST
+  connect_timeout: 10.0
+  read_timeout: 120.0
+  request_adapter:
+    body_template:
+      query: "{question}"
+      session_id: "{session_id}"
+      user_id: "{user_id}"
+      context: "{context}"
+    extra_headers:
+      X-Source: "agent-harness"
+  sse_mapping:
+    answer_event: "answer"
+    answer_content_field: "content"
+    tool_call_event: "tool_call"
+    tool_name_field: "name"
+    tool_args_field: "arguments"
+    tool_call_id_field: "call_id"
+    status_event: "status"
+    status_stage_field: "stage"
+    done_event: "done"
+    error_event: "error"
+    error_message_field: "message"
+
+eval:
+  concurrency: 4
+  repeat_count: 1
+  retry_count: 1
+  retry_delay_ms: 300
+  scorers_enabled: [intent, tool, fact, llm_judge]
+  dimension_weights:
+    intent: 0.25
+    tool: 0.25
+    fact: 0.30
+    llm_judge: 0.20
+  judge:
+    enabled: false
+    model: "gpt-4o-mini"
+    temperature: 0.0
+    max_tokens: 2048
+    cache_enabled: true
+    pass_threshold: 3.0
+    cot_enabled: true
+    consistency_check: false
+
+load:
+  concurrency: 10
+  duration_seconds: 60
+  ramp_up_seconds: 10
+  think_time_ms: 0
+
+output_dir: "harness_output"
+baseline_name: "latest"

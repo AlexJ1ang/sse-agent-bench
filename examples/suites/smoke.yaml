@@ -1,0 +1,37 @@
+id: generic-agent-smoke
+name: Generic Agent Smoke Tests
+description: Fully fictional examples for demonstrating agent-harness.
+
+cases:
+  - id: weather-001
+    question: "What is the weather in Example City today?"
+    context:
+      locale: "en-US"
+    expectations:
+      expected_intents:
+        main: "weather_query"
+      expected_tools:
+        - "get_weather"
+      expected_keywords:
+        - "Example City"
+      is_open_ended: false
+
+  - id: calculator-001
+    question: "What is 21 multiplied by 2?"
+    context:
+      locale: "en-US"
+    expectations:
+      expected_tools:
+        - "calculator"
+      expected_patterns:
+        - "\\b42\\b"
+      reference_answer: "The result is 42."
+      is_open_ended: false
+
+  - id: explanation-001
+    question: "Explain in simple terms why automated regression tests help an AI agent project."
+    context:
+      audience: "beginner"
+    expectations:
+      is_open_ended: true
+      reference_answer: "Regression tests detect unintended behavior changes before release."
