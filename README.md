@@ -1,8 +1,8 @@
-# agent-harness
+# SSE Agent Bench
 
 一个面向 **SSE 流式 LLM Agent 服务**的通用黑盒测试框架，把功能评测、性能压测、回归比较和 CI 质量门禁放在同一套命令行工具中。
 
-框架不依赖具体 Agent SDK、编排框架或业务领域。你只需要用 YAML 描述自己的 HTTP 请求结构、SSE 事件格式和测试期望，无需修改 agent-harness 源码。
+框架不依赖具体 Agent SDK、编排框架或业务领域。你只需要用 YAML 描述自己的 HTTP 请求结构、SSE 事件格式和测试期望，无需修改 SSE Agent Bench 源码。
 
 > 仓库中的服务地址、城市、工具名和用例均为虚构示例，不包含真实客户或设备数据。
 
@@ -21,8 +21,8 @@
 需要 Python 3.11 或 3.12。
 
 ```bash
-git clone https://github.com/AlexJ1ang/agent-harness.git
-cd agent-harness
+git clone https://github.com/AlexJ1ang/sse-agent-bench.git
+cd sse-agent-bench
 python -m venv .venv
 ```
 
@@ -103,7 +103,7 @@ target:
 ```yaml
 request_adapter:
   extra_headers:
-    X-Client: "agent-harness"
+    X-Client: "sse-agent-bench"
 ```
 
 认证头请只放在被忽略的 `config.local.yaml` 中，不要提交真实令牌。
@@ -192,7 +192,7 @@ cases:
 ### 5. 运行评测
 
 ```bash
-agent-harness eval \
+sse-agent-bench eval \
   --config config.local.yaml \
   --suite examples/suites/smoke.yaml
 ```
@@ -229,7 +229,7 @@ eval:
 
 ```bash
 export HARNESS_JUDGE_API_KEY="your-key"
-agent-harness eval -c config.local.yaml -s suites/regression.yaml
+sse-agent-bench eval -c config.local.yaml -s suites/regression.yaml
 ```
 
 PowerShell 使用 `$env:HARNESS_JUDGE_API_KEY = "your-key"`。Judge API 需兼容 OpenAI Chat Completions 接口。
@@ -237,7 +237,7 @@ PowerShell 使用 `$env:HARNESS_JUDGE_API_KEY = "your-key"`。Judge API 需兼�
 ## 性能压测
 
 ```bash
-agent-harness load \
+sse-agent-bench load \
   --config config.local.yaml \
   --suite examples/suites/smoke.yaml \
   --concurrency 10 \
@@ -250,23 +250,23 @@ agent-harness load \
 
 ```bash
 # 查看已有基线和 trace run
-agent-harness list
+sse-agent-bench list
 
 # 回放单个用例并生成回答、工具和耗时 diff
-agent-harness replay -c config.local.yaml -s suites/regression.yaml \
+sse-agent-bench replay -c config.local.yaml -s suites/regression.yaml \
   --run-id <run_id> --case-id <case_id>
 
 # 从 JSON 重新生成 HTML
-agent-harness report -i harness_output/report_<run_id>.json
+sse-agent-bench report -i harness_output/report_<run_id>.json
 
 # 预览将被清理的旧 trace；加 --yes 才实际删除
-agent-harness prune --keep 20
+sse-agent-bench prune --keep 20
 ```
 
 ## CI 质量门禁
 
 ```bash
-agent-harness eval \
+sse-agent-bench eval \
   -c config.local.yaml \
   -s suites/regression.yaml \
   --gate \

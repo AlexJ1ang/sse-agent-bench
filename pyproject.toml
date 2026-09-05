@@ -3,14 +3,14 @@ requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "agent-harness"
+name = "sse-agent-bench"
 version = "1.0.0"
-description = "LLM Agent 质量保障 Harness：功能评测 + 性能压测一体化框架"
+description = "Configurable evaluation, regression, replay, and load testing for SSE-based LLM agents"
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.11,<3.13"
 authors = [
-    { name = "agent-harness contributors" },
+    { name = "SSE Agent Bench contributors" },
 ]
 keywords = ["llm", "agent", "evaluation", "testing", "sse", "benchmark"]
 classifiers = [
@@ -36,12 +36,12 @@ dev = [
 ]
 
 [project.scripts]
-agent-harness = "agent_harness.cli:main"
+sse-agent-bench = "agent_harness.cli:main"
 
 [project.urls]
-Documentation = "https://github.com/AlexJ1ang/agent-harness#readme"
-Issues = "https://github.com/AlexJ1ang/agent-harness/issues"
-Source = "https://github.com/AlexJ1ang/agent-harness"
+Documentation = "https://github.com/AlexJ1ang/sse-agent-bench#readme"
+Issues = "https://github.com/AlexJ1ang/sse-agent-bench/issues"
+Source = "https://github.com/AlexJ1ang/sse-agent-bench"
 
 [tool.setuptools.packages.find]
 where = ["src"]

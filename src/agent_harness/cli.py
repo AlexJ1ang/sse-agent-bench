@@ -1,9 +1,9 @@
-"""Agent Harness CLI 入口。
+"""SSE Agent Bench CLI 入口。
 
 用法：
-    agent-harness eval --config config.yaml --suite cases.yaml
-    agent-harness load --config config.yaml --suite cases.yaml
-    agent-harness report --input harness_output/report_xxx.json --format html
+    sse-agent-bench eval --config config.yaml --suite cases.yaml
+    sse-agent-bench load --config config.yaml --suite cases.yaml
+    sse-agent-bench report --input harness_output/report_xxx.json --format html
 """
 
 from __future__ import annotations
@@ -35,8 +35,8 @@ STRATEGY_CHOICES = list(STRATEGIES)
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="agent-harness",
-        description="LLM Agent 质量保障 Harness：功能评测 + 性能压测一体化框架",
+        prog="sse-agent-bench",
+        description="SSE 流式 LLM Agent 的评测、回归、回放与性能压测工具",
     )
     parser.add_argument("--version", action="version", version="%(prog)s 1.0.0")
     parser.add_argument(
@@ -639,8 +639,8 @@ async def _cmd_synthesize(args: argparse.Namespace) -> int:
     print(f"\n{'='*50}")
     print(f"合成完成: {len(variants)} 条变体（来自 {len(seeds)} 条种子，{target_desc}）")
     print(f"输出: {args.out}")
-    print(f"\nNOTE: 请人工审核后合并入主用例集——"
-          f"自动扩充只是起点，人工审核保证数据质量。")
+    print("\nNOTE: 请人工审核后合并入主用例集——"
+          "自动扩充只是起点，人工审核保证数据质量。")
     print(f"{'='*50}\n")
     return 0
 

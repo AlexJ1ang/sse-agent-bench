@@ -1,6 +1,6 @@
 id: generic-agent-smoke
 name: Generic Agent Smoke Tests
-description: Fully fictional examples for demonstrating agent-harness.
+description: Fully fictional examples for demonstrating SSE Agent Bench.
 
 cases:
   - id: weather-001

@@ -1,6 +1,6 @@
 # Contributing
 
-感谢你为 agent-harness 做贡献。
+感谢你为 SSE Agent Bench 做贡献。
 
 ## 本地开发
 

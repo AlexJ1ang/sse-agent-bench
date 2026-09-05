@@ -14,7 +14,7 @@ target:
       user_id: "{user_id}"
       context: "{context}"
     extra_headers:
-      X-Source: "agent-harness"
+      X-Source: "sse-agent-bench"
   sse_mapping:
     answer_event: "answer"
     answer_content_field: "content"
