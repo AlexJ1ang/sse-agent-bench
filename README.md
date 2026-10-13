@@ -18,7 +18,7 @@
 
 ## 安装
 
-需要 Python 3.11 或 3.12。
+需要 Python 3.11、3.12 或 3.13。
 
 ```bash
 git clone https://github.com/AlexJ1ang/sse-agent-bench.git
