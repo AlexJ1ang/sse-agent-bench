@@ -153,6 +153,14 @@ target:
 
 ### 4. 为自己的项目编写测试集
 
+仓库提供三个可运行的示例套件：
+
+| 套件 | 用途 |
+|---|---|
+| `examples/suites/smoke.yaml` | 功能评测：意图、工具、关键词、正则校验 |
+| `examples/suites/load.yaml` | 性能压测：短而多样的问题，配合 `load` 命令 |
+| `examples/suites/judge.yaml` | 开放问题评分：`is_open_ended` 用例，配合 LLM-as-Judge |
+
 复制 `examples/suites/smoke.yaml`，然后替换问题、上下文和期望：
 
 ```yaml
@@ -229,7 +237,7 @@ eval:
 
 ```bash
 export HARNESS_JUDGE_API_KEY="your-key"
-sse-agent-bench eval -c config.local.yaml -s suites/regression.yaml
+sse-agent-bench eval -c config.local.yaml -s examples/suites/judge.yaml
 ```
 
 PowerShell 使用 `$env:HARNESS_JUDGE_API_KEY = "your-key"`。Judge API 需兼容 OpenAI Chat Completions 接口。
@@ -239,7 +247,7 @@ PowerShell 使用 `$env:HARNESS_JUDGE_API_KEY = "your-key"`。Judge API 需兼�
 ```bash
 sse-agent-bench load \
   --config config.local.yaml \
-  --suite examples/suites/smoke.yaml \
+  --suite examples/suites/load.yaml \
   --concurrency 10 \
   --duration 60
 ```
@@ -253,7 +261,7 @@ sse-agent-bench load \
 sse-agent-bench list
 
 # 回放单个用例并生成回答、工具和耗时 diff
-sse-agent-bench replay -c config.local.yaml -s suites/regression.yaml \
+sse-agent-bench replay -c config.local.yaml -s examples/suites/smoke.yaml \
   --run-id <run_id> --case-id <case_id>
 
 # 从 JSON 重新生成 HTML
@@ -268,7 +276,7 @@ sse-agent-bench prune --keep 20
 ```bash
 sse-agent-bench eval \
   -c config.local.yaml \
-  -s suites/regression.yaml \
+  -s examples/suites/smoke.yaml \
   --gate \
   --gate-min-score 0.70 \
   --gate-min-pass-rate 0.90 \
