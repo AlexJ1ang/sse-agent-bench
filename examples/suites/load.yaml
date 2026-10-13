@@ -1,0 +1,38 @@
+id: generic-agent-load
+name: Generic Agent Load Test Suite
+description: >
+  Short, diverse questions tuned for load testing (throughput, TTFT,
+  latency percentiles). Use with `sse-agent-bench load`.
+
+cases:
+  - id: load-weather-001
+    question: "What is the weather in Example City today?"
+    context:
+      locale: "en-US"
+    expectations:
+      expected_keywords:
+        - "Example City"
+      is_open_ended: false
+
+  - id: load-calc-001
+    question: "What is 12 plus 30?"
+    context:
+      locale: "en-US"
+    expectations:
+      expected_patterns:
+        - "\\b42\\b"
+      is_open_ended: false
+
+  - id: load-status-001
+    question: "Give me a one-sentence status summary for unit A-100."
+    context:
+      locale: "en-US"
+    expectations:
+      is_open_ended: false
+
+  - id: load-smalltalk-001
+    question: "Say hello in one short sentence."
+    context:
+      locale: "en-US"
+    expectations:
+      is_open_ended: false

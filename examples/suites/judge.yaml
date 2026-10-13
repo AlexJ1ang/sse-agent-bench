@@ -1,0 +1,30 @@
+id: generic-agent-judge
+name: Generic Agent Open-ended (LLM-as-Judge) Suite
+description: >
+  Open-ended cases scored by the optional LLM-as-Judge. Requires
+  HARNESS_JUDGE_API_KEY and `judge.enabled: true` in your local config.
+
+cases:
+  - id: judge-explanation-001
+    question: "Explain in simple terms why automated regression tests help an AI agent project."
+    context:
+      audience: "beginner"
+    expectations:
+      is_open_ended: true
+      reference_answer: "Regression tests detect unintended behavior changes before release."
+
+  - id: judge-tradeoff-001
+    question: "What are the trade-offs between rule-based checks and LLM-based judging in an evaluation framework?"
+    context:
+      audience: "engineer"
+    expectations:
+      is_open_ended: true
+      reference_answer: "Rule checks are deterministic and cheap but narrow; LLM judging is flexible but needs calibration and cost control."
+
+  - id: judge-summary-001
+    question: "Summarize what a smoke test suite is for, in two sentences."
+    context:
+      locale: "en-US"
+    expectations:
+      is_open_ended: true
+      reference_answer: "A smoke suite runs a small set of core cases to verify the service is broadly functional before deeper testing."
